@@ -32,7 +32,7 @@
   "assets": {
     // 静态资源目录：填写相对于项目根目录的构建输出路径。
     // Vite 通常为 ./dist；也可以是 ./public 或 ./build。
-    "directory": "./dist",
+    "directory": "./assets",
 
     // 未找到静态资源时的处理策略。
     // singlePageApplication：适用于 SPA，使用 index.html 作为页面回退。
