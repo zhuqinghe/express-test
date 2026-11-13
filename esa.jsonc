@@ -15,12 +15,12 @@
   // 项目构建命令：填写 package.json 中对应的构建脚本。
   // 本例假设 npm run build 会把前端构建到 dist。
   // 此项用于云端构建，CLI 不会因读取此配置自动执行它。
-  "buildCommand": "npm run build",
+  "buildCommand": "",
 
   // EdgeFunction 入口：填写相对于项目根目录的边缘函数文件路径。
   // 不是 Express、Next.js 等 EFC 后端服务的入口。
   // 不使用 EdgeFunction 时删除此项。
-  "entry": "./edge.ts",
+  "entry": "./server.ts",
 
   // 是否跳过 EdgeFunction 的编译。
   // false：由构建工具编译；TypeScript 源码通常使用此值。
