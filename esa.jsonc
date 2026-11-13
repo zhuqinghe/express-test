@@ -1,0 +1,83 @@
+{
+  // 项目名称：填写部署目标的名称，例如 my-fullstack-app。
+  // CLI 部署时用于选择已有项目或创建新项目。
+  "name": "my-fullstack-app",
+
+  // 项目描述：填写项目用途，可选。
+  // 与 name 一样，不会写入本次生成的 FC conf.jsonc。
+  "description": "React 前端、边缘函数和 Express 后端示例",
+
+  // 安装依赖的命令：根据包管理器填写。
+  // 例如 npm install、pnpm install、yarn install。
+  // 显式填写 "" 会跳过依赖安装；此项用于云端构建。
+  "installCommand": "npm install",
+
+  // 项目构建命令：填写 package.json 中对应的构建脚本。
+  // 本例假设 npm run build 会把前端构建到 dist。
+  // 此项用于云端构建，CLI 不会因读取此配置自动执行它。
+  "buildCommand": "",
+
+  // EdgeFunction 入口：填写相对于项目根目录的边缘函数文件路径。
+  // 不是 Express、Next.js 等 EFC 后端服务的入口。
+  // 不使用 EdgeFunction 时删除此项。
+  "entry": "./server.ts",
+
+  // 是否跳过 EdgeFunction 的编译。
+  // false：由构建工具编译；TypeScript 源码通常使用此值。
+  // true：直接复制入口文件，要求文件已经是可运行的 JavaScript。
+  // 不影响前端构建或 EFC 后端构建。
+  "skipFunctionBuild": false,
+
+  // 静态资源配置：没有静态资源时删除整个 assets。
+  "assets": {
+    // 静态资源目录：填写相对于项目根目录的构建输出路径。
+    // Vite 通常为 ./dist；也可以是 ./public 或 ./build。
+    "directory": "./assets",
+
+    // 未找到静态资源时的处理策略。
+    // singlePageApplication：适用于 SPA，使用 index.html 作为页面回退。
+    // 404Page：适用于静态多页站点，使用 404.html 作为页面回退。
+    // 不需要上述回退行为时删除此项。
+    "notFoundStrategy": "singlePageApplication"
+
+    // HTML URL 处理策略：当前 TestStep 支持将此字段透传给平台。
+    // 仓库未定义合法枚举，下面仅展示字段位置和模拟值；
+    // 确认平台支持该值后，补上前一项的逗号并取消注释。
+    // "htmlHandling": "auto-trailing-slash"
+  },
+
+  // 优先执行 EdgeFunction 的路由：填写以 / 开头的路径模式。
+  // 本例将 /edge/*、/promo/* 交给边缘函数优先处理。
+  // 可改为 true 表示全部请求优先走边缘函数；
+  // false 或删除此项则不启用这种优先规则。
+  "edgeFunctionFirst": ["/edge/*", "/promo/*"],
+
+  // EFC 后端配置：仅在项目确实需要并生成 EFC 产物时填写。
+  // 纯静态或仅 EdgeFunction 项目应删除整个 regionFunction。
+  // 此节点不是后端入口配置，也不能替代后端框架检测和构建。
+  "regionFunction": {
+    // 部署运行时：填写平台支持的 runtime 标识。
+    // 未填写或不是非空字符串时，构建工具使用 nodejs22。
+    // 此项不会改变构建环境中的 Node.js 版本。
+    "runtime": "nodejs22",
+
+    // 实例规格：填写平台支持、且当前套餐允许的规格。
+    // 例如 2C4G；去除首尾空白，保留大小写。
+    // 最终映射为 FC conf.jsonc 中的 spec。
+    "instanceType": "2C4G",
+
+    // 最小实例数：填写大于等于 0 的整数。
+    // 显式填写 0 会保留；平台是否允许由后端检查。
+    "minInstances": 0,
+
+    // 单实例并发数：填写大于等于 1 的整数。
+    // 应根据应用承载能力和套餐限制设置。
+    "concurrency": 10,
+
+    // 请求超时时间，单位为秒：填写 1-86400 的整数。
+    "timeout": 600,
+
+    // 实例闲置超时时间，单位为秒：填写 300-3600 的整数。
+    "idleTimeout": 600
+  },
+}
