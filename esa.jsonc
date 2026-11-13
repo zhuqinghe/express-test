@@ -10,7 +10,7 @@
   // 安装依赖的命令：根据包管理器填写。
   // 例如 npm install、pnpm install、yarn install。
   // 显式填写 "" 会跳过依赖安装；此项用于云端构建。
-  "installCommand": "npm install",
+  "installCommand": "",
 
   // 项目构建命令：填写 package.json 中对应的构建脚本。
   // 本例假设 npm run build 会把前端构建到 dist。
